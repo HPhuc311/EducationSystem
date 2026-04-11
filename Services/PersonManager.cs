@@ -36,5 +36,16 @@ namespace EducationSystem.Services
                 return people[index];
             return null;
         }
+
+        public List<Person> Search(string keyword)
+        {
+            keyword = keyword.ToLower();
+
+            return people.Where(p =>
+                p.Name.ToLower().Contains(keyword) ||
+                p.Email.ToLower().Contains(keyword) ||
+                p.Phone.ToLower().Contains(keyword)
+            ).ToList();
+        }
     }
 }

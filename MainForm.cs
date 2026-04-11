@@ -13,6 +13,12 @@ namespace EducationSystem
         private PersonManager manager = new PersonManager();
         private List<Person> currentList = new List<Person>();
 
+        private TextBox txtSearch;
+        private Button btnSearch;
+
+        private Panel detailPanel;
+        private DataGridView dgvDetail;
+
         private DataGridView dgv;
         private ComboBox comboRole;
         private Button btnAdd, btnView, btnEdit, btnDelete;
@@ -55,11 +61,11 @@ namespace EducationSystem
             {
                 Left = 20,
                 Top = 60,
-                Width = 740,
+                Width = 540,
                 Height = 360,
                 ReadOnly = true,
                 AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill,
-                SelectionMode = DataGridViewSelectionMode.FullRowSelect
+                SelectionMode = DataGridViewSelectionMode.FullRowSelect,
             };
 
             this.Controls.Add(comboRole);
@@ -68,6 +74,48 @@ namespace EducationSystem
             this.Controls.Add(btnEdit);
             this.Controls.Add(btnDelete);
             this.Controls.Add(dgv);
+
+            dgv.SelectionChanged += Dgv_SelectionChanged;
+
+            txtSearch = new TextBox()
+            {
+                Left = 520,
+                Top = 20,
+                Width = 150
+            };
+
+            btnSearch = new Button()
+            {
+                Text = "Search",
+                Left = 680,
+                Top = 20,
+                Width = 80
+            };
+
+            btnSearch.Click += BtnSearch_Click;
+
+            this.Controls.Add(txtSearch);
+            this.Controls.Add(btnSearch);
+
+            detailPanel = new Panel()
+            {
+                Left = 580,
+                Top = 60,
+                Width = 200,
+                Height = 360,
+                BorderStyle = BorderStyle.FixedSingle
+            };
+
+            dgvDetail = new DataGridView()
+            {
+                Dock = DockStyle.Fill,
+                ReadOnly = true,
+                AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill,
+                RowHeadersVisible = false
+            };
+
+            detailPanel.Controls.Add(dgvDetail);
+            this.Controls.Add(detailPanel);
         }
 
         private void LoadRoles()
@@ -126,6 +174,62 @@ namespace EducationSystem
             manager.Delete(p);
 
             LoadData();
+        }
+
+        private void BtnSearch_Click(object sender, EventArgs e)
+        {
+            dgv.DataSource = null;
+
+            currentList = manager.Search(txtSearch.Text);
+
+            dgv.DataSource = currentList.Select(p => new
+            {
+                p.Name,
+                p.Phone,
+                p.Email,
+                Role = p.GetRole()
+            }).ToList();
+        }
+
+        private void Dgv_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgv.CurrentRow == null) return;
+
+            Person p = currentList[dgv.CurrentRow.Index];
+
+            dgvDetail.DataSource = GetDetailTable(p);
+        }
+
+
+        private object GetDetailTable(Person p)
+        {
+            var list = new List<object>();
+
+            list.Add(new { Field = "Role", Value = p.GetRole() });
+            list.Add(new { Field = "Name", Value = p.Name });
+            list.Add(new { Field = "Phone", Value = p.Phone });
+            list.Add(new { Field = "Email", Value = p.Email });
+
+            if (p is Teacher t)
+            {
+                list.Add(new { Field = "Salary", Value = t.Salary });
+                list.Add(new { Field = "Subject 1", Value = t.Subject1 });
+                list.Add(new { Field = "Subject 2", Value = t.Subject2 });
+            }
+            else if (p is Admin a)
+            {
+                list.Add(new { Field = "Salary", Value = a.Salary });
+                list.Add(new { Field = "Work Type", Value = a.WorkType });
+                list.Add(new { Field = "Working Hours", Value = a.WorkingHours });
+            }
+            else if (p is Student s)
+            {
+                list.Add(new { Field = "Subject 1", Value = s.Subject1 });
+                list.Add(new { Field = "Subject 2", Value = s.Subject2 });
+                list.Add(new { Field = "Subject 3", Value = s.Subject3 });
+            }
+
+            return list;
         }
     }
 }
