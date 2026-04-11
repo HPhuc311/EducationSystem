@@ -10,25 +10,32 @@ namespace EducationSystem
 {
     public class MainForm : Form
     {
+        // Manager handles all data operations
         private PersonManager manager = new PersonManager();
+
+        // Current list displayed on DataGridView
         private List<Person> currentList = new List<Person>();
 
+        // Search controls
         private TextBox txtSearch;
         private Button btnSearch;
 
+        // Detail panel (right side)
         private Panel detailPanel;
         private DataGridView dgvDetail;
 
+        // Main table and controls
         private DataGridView dgv;
         private ComboBox comboRole;
         private Button btnAdd, btnView, btnEdit, btnDelete;
 
         public MainForm()
         {
-            InitializeUI();
-            LoadRoles();
+            InitializeUI(); // Setup UI
+            LoadRoles();    // Load role options
         }
 
+        // ================= UI =================
         private void InitializeUI()
         {
             this.Text = "Education System";
@@ -36,7 +43,7 @@ namespace EducationSystem
             this.Height = 500;
             this.StartPosition = FormStartPosition.CenterScreen;
 
-            // ComboBox
+            // Dropdown to filter by role
             comboRole = new ComboBox()
             {
                 Left = 20,
@@ -44,19 +51,19 @@ namespace EducationSystem
                 Width = 120
             };
 
-            // Buttons
-            btnView = new Button() { Text = "View", Left = 160, Top = 20, Width = 80 };
-            btnAdd = new Button() { Text = "Add", Left = 250, Top = 20, Width = 80 };
-            btnEdit = new Button() { Text = "Edit", Left = 340, Top = 20, Width = 80 };
-            btnDelete = new Button() { Text = "Delete", Left = 430, Top = 20, Width = 80 };
+            // Buttons for CRUD operations
+            btnView = new Button() { Text = "View", Left = 160, Top = 20 };
+            btnAdd = new Button() { Text = "Add", Left = 250, Top = 20 };
+            btnEdit = new Button() { Text = "Edit", Left = 340, Top = 20 };
+            btnDelete = new Button() { Text = "Delete", Left = 430, Top = 20 };
 
-            // Events
+            // Assign button events
             btnView.Click += (s, e) => LoadData();
             btnAdd.Click += BtnAdd_Click;
             btnEdit.Click += BtnEdit_Click;
             btnDelete.Click += BtnDelete_Click;
 
-            // DataGridView
+            // Main DataGridView (list of users)
             dgv = new DataGridView()
             {
                 Left = 20,
@@ -65,18 +72,13 @@ namespace EducationSystem
                 Height = 360,
                 ReadOnly = true,
                 AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill,
-                SelectionMode = DataGridViewSelectionMode.FullRowSelect,
+                SelectionMode = DataGridViewSelectionMode.FullRowSelect
             };
 
-            this.Controls.Add(comboRole);
-            this.Controls.Add(btnView);
-            this.Controls.Add(btnAdd);
-            this.Controls.Add(btnEdit);
-            this.Controls.Add(btnDelete);
-            this.Controls.Add(dgv);
-
+            // When selecting a row → show detail
             dgv.SelectionChanged += Dgv_SelectionChanged;
 
+            // Search textbox
             txtSearch = new TextBox()
             {
                 Left = 520,
@@ -84,19 +86,17 @@ namespace EducationSystem
                 Width = 150
             };
 
+            // Search button
             btnSearch = new Button()
             {
                 Text = "Search",
                 Left = 680,
-                Top = 20,
-                Width = 80
+                Top = 20
             };
 
             btnSearch.Click += BtnSearch_Click;
 
-            this.Controls.Add(txtSearch);
-            this.Controls.Add(btnSearch);
-
+            // Detail panel on the right
             detailPanel = new Panel()
             {
                 Left = 580,
@@ -106,6 +106,7 @@ namespace EducationSystem
                 BorderStyle = BorderStyle.FixedSingle
             };
 
+            // DataGridView to show detailed information
             dgvDetail = new DataGridView()
             {
                 Dock = DockStyle.Fill,
@@ -115,32 +116,60 @@ namespace EducationSystem
             };
 
             detailPanel.Controls.Add(dgvDetail);
+
+            // Add controls to form
+            this.Controls.Add(comboRole);
+            this.Controls.Add(btnView);
+            this.Controls.Add(btnAdd);
+            this.Controls.Add(btnEdit);
+            this.Controls.Add(btnDelete);
+            this.Controls.Add(dgv);
+            this.Controls.Add(txtSearch);
+            this.Controls.Add(btnSearch);
             this.Controls.Add(detailPanel);
         }
 
+        // Load roles into ComboBox
         private void LoadRoles()
         {
             comboRole.Items.AddRange(new string[] { "All", "Teacher", "Admin", "Student" });
             comboRole.SelectedIndex = 0;
         }
 
+        // ================= DATA =================
+
+        // Load data from manager based on selected role
         private void LoadData()
+        {
+            List<Person> data;
+
+            if (comboRole.Text == "All")
+                data = manager.GetAllPeople();
+            else
+                data = manager.GetPeopleByRole(comboRole.Text);
+
+            currentList = data;
+
+            DisplayData(data);
+        }
+
+        // Display list on DataGridView
+        private void DisplayData(List<Person> list)
         {
             dgv.DataSource = null;
 
-            currentList = comboRole.Text == "All"
-                ? manager.GetAll()
-                : manager.GetByRole(comboRole.Text);
-
-            dgv.DataSource = currentList.Select(p => new
+            dgv.DataSource = list.Select(p => new
             {
-                p.Name,
-                p.Phone,
-                p.Email,
+                Name = p.Name,
+                Phone = p.Phone,
+                Email = p.Email,
                 Role = p.GetRole()
             }).ToList();
         }
 
+        // ================= BUTTON EVENTS =================
+
+        // Add new person
         private void BtnAdd_Click(object sender, EventArgs e)
         {
             AddEditForm form = new AddEditForm();
@@ -152,6 +181,7 @@ namespace EducationSystem
             }
         }
 
+        // Edit selected person
         private void BtnEdit_Click(object sender, EventArgs e)
         {
             if (dgv.CurrentRow == null) return;
@@ -166,6 +196,7 @@ namespace EducationSystem
             }
         }
 
+        // Delete selected person
         private void BtnDelete_Click(object sender, EventArgs e)
         {
             if (dgv.CurrentRow == null) return;
@@ -176,31 +207,35 @@ namespace EducationSystem
             LoadData();
         }
 
+        // Search function
         private void BtnSearch_Click(object sender, EventArgs e)
         {
-            dgv.DataSource = null;
+            var result = manager.Search(txtSearch.Text);
 
-            currentList = manager.Search(txtSearch.Text);
+            currentList = result;
 
-            dgv.DataSource = currentList.Select(p => new
-            {
-                p.Name,
-                p.Phone,
-                p.Email,
-                Role = p.GetRole()
-            }).ToList();
+            DisplayData(result);
         }
 
+        // ================= DETAIL =================
+
+        // When user selects a row → show detail
         private void Dgv_SelectionChanged(object sender, EventArgs e)
         {
             if (dgv.CurrentRow == null) return;
 
-            Person p = currentList[dgv.CurrentRow.Index];
+            Person selectedPerson = currentList[dgv.CurrentRow.Index];
 
+            ShowDetail(selectedPerson);
+        }
+
+        // Display detail in right panel
+        private void ShowDetail(Person p)
+        {
             dgvDetail.DataSource = GetDetailTable(p);
         }
 
-
+        // Convert Person object into table format (Field - Value)
         private object GetDetailTable(Person p)
         {
             var list = new List<object>();
@@ -210,6 +245,7 @@ namespace EducationSystem
             list.Add(new { Field = "Phone", Value = p.Phone });
             list.Add(new { Field = "Email", Value = p.Email });
 
+            // Add extra fields depending on type
             if (p is Teacher t)
             {
                 list.Add(new { Field = "Salary", Value = t.Salary });

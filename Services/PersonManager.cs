@@ -6,37 +6,35 @@ namespace EducationSystem.Services
 {
     public class PersonManager
     {
-        // Data structure: dynamic list
+        // List used to store all Person objects (Teacher, Admin, Student)
         private List<Person> people = new List<Person>();
 
+        // Add a new person into the list
         public void Add(Person p)
         {
             people.Add(p);
         }
 
-        public List<Person> GetAll()
+        // Return all people in the system
+        public List<Person> GetAllPeople()
         {
             return people;
         }
 
-        public List<Person> GetByRole(string role)
+        // Return people filtered by role (Teacher/Admin/Student)
+        public List<Person> GetPeopleByRole(string role)
         {
             return people.Where(p => p.GetRole() == role).ToList();
         }
 
+        // Remove a person from the list
         public void Delete(Person p)
         {
             if (p != null)
                 people.Remove(p);
         }
 
-        public Person Get(int index)
-        {
-            if (index >= 0 && index < people.Count)
-                return people[index];
-            return null;
-        }
-
+        // Search people by keyword (name, email, or phone)
         public List<Person> Search(string keyword)
         {
             keyword = keyword.ToLower();
