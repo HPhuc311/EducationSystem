@@ -8,47 +8,60 @@ namespace EducationSystem
 {
     public class AddEditForm : Form
     {
+        // Store result after user clicks Save
         public Person PersonData { get; private set; }
+
+        // If editing existing person
         private Person editingPerson = null;
 
-        // Common
+        // ===== COMMON INPUT FIELDS =====
         TextBox txtName, txtPhone, txtEmail;
         ComboBox comboRole;
+
+        // Error labels for validation
         Label errName, errEmail, errPhone;
         Label errTSub1, errTSub2;
         Label errSSub1, errSSub2, errSSub3;
+        Label errRole;
+        Label errTSalary;
+        Label errASalary;
+        Label errWork;
 
-        // GroupBox
+        // Group containers for each role
         GroupBox grpTeacher, grpStudent, grpAdmin;
 
-        // Teacher
+        // ===== TEACHER FIELDS =====
         TextBox tSalary, tSub1, tSub2;
         Label errSalary;
 
-        // Student
+        // ===== STUDENT FIELDS =====
         TextBox sSub1, sSub2, sSub3;
 
-        // Admin
+        // ===== ADMIN FIELDS =====
         TextBox aSalary, aWork, aHours;
         Label errHours;
 
         Button btnSave;
 
+        // Constructor for Add new
         public AddEditForm()
         {
-            InitUI();
-            SetupValidation();
+            InitUI();          // Build UI
+            SetupValidation(); // Setup validation events
         }
 
+        // Constructor for Edit existing
         public AddEditForm(Person p) : this()
         {
             editingPerson = p;
 
+            // Fill data into form
             txtName.Text = p.Name;
             txtPhone.Text = p.Phone;
             txtEmail.Text = p.Email;
             comboRole.Text = p.GetRole();
 
+            // Load specific fields based on role
             if (p is Teacher t)
             {
                 tSalary.Text = t.Salary.ToString();
@@ -68,12 +81,13 @@ namespace EducationSystem
                 sSub3.Text = s.Subject3;
             }
 
-            UpdateGroup();
+            UpdateGroup(); // Show correct group
         }
 
         // ================= UI =================
         private void InitUI()
         {
+            // Form settings
             this.Text = "Add / Edit";
             this.Width = 420;
             this.Height = 520;
@@ -81,42 +95,64 @@ namespace EducationSystem
 
             int top = 20;
 
+            // Create common fields
             txtName = Create("Name", ref top, out errName);
             txtPhone = Create("Phone", ref top, out errPhone);
             txtEmail = Create("Email", ref top, out errEmail);
 
+            // Role selection
             Controls.Add(new Label() { Text = "Role", Left = 20, Top = top + 3 });
+
             comboRole = new ComboBox() { Left = 120, Top = top, Width = 150 };
             comboRole.Items.AddRange(new string[] { "Teacher", "Admin", "Student" });
+
+            // Change UI when role changes
             comboRole.SelectedIndexChanged += (s, e) => UpdateGroup();
+
             Controls.Add(comboRole);
             top += 50;
 
+            // ===== TEACHER GROUP =====
             grpTeacher = new GroupBox() { Text = "Teacher", Left = 20, Top = top, Width = 350, Height = 120 };
-            tSalary = Add(grpTeacher, "Salary", 20, out errSalary);
+            tSalary = Add(grpTeacher, "Salary", 20, out errTSalary);
             tSub1 = Add(grpTeacher, "Subject1", 50, out errTSub1);
             tSub2 = Add(grpTeacher, "Subject2", 80, out errTSub2);
             Controls.Add(grpTeacher);
 
+            // ===== STUDENT GROUP =====
             grpStudent = new GroupBox() { Text = "Student", Left = 20, Top = top, Width = 350, Height = 120 };
             sSub1 = Add(grpStudent, "Subject1", 20, out errSSub1);
             sSub2 = Add(grpStudent, "Subject2", 50, out errSSub2);
             sSub3 = Add(grpStudent, "Subject3", 80, out errSSub3);
             Controls.Add(grpStudent);
 
+            // ===== ADMIN GROUP =====
             grpAdmin = new GroupBox() { Text = "Admin", Left = 20, Top = top, Width = 350, Height = 120 };
-            aSalary = Add(grpAdmin, "Salary", 20, out _);
-            aWork = Add(grpAdmin, "WorkType", 50, out _);
+            aSalary = Add(grpAdmin, "Salary", 20, out errASalary);
+            aWork = Add(grpAdmin, "WorkType", 50, out errWork);
             aHours = Add(grpAdmin, "Hours", 80, out errHours);
             Controls.Add(grpAdmin);
 
+            // Save button
             btnSave = new Button() { Text = "Save", Left = 150, Top = top + 140, Width = 100 };
             btnSave.Click += Save;
             Controls.Add(btnSave);
 
+            // Error label for Role
+            errRole = new Label()
+            {
+                Left = 120,
+                Top = comboRole.Bottom + 2,
+                ForeColor = Color.Red,
+                AutoSize = true,
+                Visible = false
+            };
+            Controls.Add(errRole);
+
             UpdateGroup();
         }
 
+        // Show correct group based on selected role
         private void UpdateGroup()
         {
             grpTeacher.Visible = comboRole.Text == "Teacher";
@@ -127,20 +163,25 @@ namespace EducationSystem
         // ================= VALIDATION =================
         private void SetupValidation()
         {
-            // realtime validate
+            // Realtime validation (trigger when user types)
             txtName.TextChanged += (s, e) => ValidateName();
             txtEmail.TextChanged += (s, e) => ValidateEmail();
             txtPhone.TextChanged += (s, e) => ValidatePhone();
+
             tSalary.TextChanged += (s, e) => ValidateSalary();
             aSalary.TextChanged += (s, e) => ValidateSalary();
             aHours.TextChanged += (s, e) => ValidateHours();
+            aWork.TextChanged += (s, e) => ValidateWorkType();
+
             tSub1.TextChanged += (s, e) => ValidateSubjects();
             tSub2.TextChanged += (s, e) => ValidateSubjects();
             sSub1.TextChanged += (s, e) => ValidateSubjects();
             sSub2.TextChanged += (s, e) => ValidateSubjects();
             sSub3.TextChanged += (s, e) => ValidateSubjects();
 
-            // Block incorrect input
+            comboRole.SelectedIndexChanged += (s, e) => ValidateRole();
+
+            // Block invalid input (prevent typing wrong characters)
             txtPhone.KeyPress += OnlyNumber_KeyPress;
             tSalary.KeyPress += OnlyNumber_KeyPress;
             aSalary.KeyPress += OnlyNumber_KeyPress;
@@ -155,19 +196,24 @@ namespace EducationSystem
         }
 
         // ===== INPUT FILTER =====
+
+        // Allow only numbers
         private void OnlyNumber_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
                 e.Handled = true;
         }
 
+        // Allow only letters and spaces
         private void OnlyText_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsLetter(e.KeyChar) && !char.IsWhiteSpace(e.KeyChar))
                 e.Handled = true;
         }
 
-        // ===== VALIDATE =====
+        // ===== VALIDATION FUNCTIONS =====
+
+        // Validate Name
         private bool ValidateName()
         {
             if (string.IsNullOrWhiteSpace(txtName.Text))
@@ -183,6 +229,7 @@ namespace EducationSystem
             return true;
         }
 
+        // Validate Email format
         private bool ValidateEmail()
         {
             try
@@ -201,6 +248,7 @@ namespace EducationSystem
             }
         }
 
+        // Validate Phone number
         private bool ValidatePhone()
         {
             if (string.IsNullOrWhiteSpace(txtPhone.Text))
@@ -224,10 +272,34 @@ namespace EducationSystem
             return true;
         }
 
+        // Validate Role selection
+        private bool ValidateRole()
+        {
+            if (string.IsNullOrEmpty(comboRole.Text))
+            {
+                errRole.Text = "Please select role";
+                errRole.Visible = true;
+                return false;
+            }
+
+            errRole.Visible = false;
+            return true;
+        }
+
+        // Validate Salary for Teacher and Admin
         private bool ValidateSalary()
         {
+            // ===== TEACHER =====
             if (comboRole.Text == "Teacher")
             {
+                if (string.IsNullOrWhiteSpace(tSalary.Text))
+                {
+                    errTSalary.Text = "Salary is required";
+                    errTSalary.Visible = true;
+                    tSalary.BackColor = Color.MistyRose;
+                    return false;
+                }
+
                 if (!double.TryParse(tSalary.Text, out double sal) || sal <= 0)
                 {
                     errSalary.Text = "Salary must be > 0";
@@ -240,22 +312,38 @@ namespace EducationSystem
                 tSalary.BackColor = Color.White;
             }
 
+            // ===== ADMIN =====
             if (comboRole.Text == "Admin")
             {
-                if (!double.TryParse(aSalary.Text, out double sal) || sal <= 0)
+                if (string.IsNullOrWhiteSpace(aSalary.Text))
                 {
-                    MessageBox.Show("Admin salary must be > 0");
+                    errASalary.Text = "Salary is required";
+                    errASalary.Visible = true;
+                    aSalary.BackColor = Color.MistyRose;
                     return false;
                 }
+
+                if (!double.TryParse(aSalary.Text, out double sal) || sal <= 0)
+                {
+                    errSalary.Text = "Salary must be > 0";
+                    errSalary.Visible = true;
+                    aSalary.BackColor = Color.MistyRose;
+                    return false;
+                }
+
+                errSalary.Visible = false;
+                aSalary.BackColor = Color.White;
             }
 
             return true;
         }
 
+        // Validate Working Hours for Admin
         private bool ValidateHours()
         {
             if (comboRole.Text == "Admin")
             {
+                // Must be integer and > 0
                 if (!int.TryParse(aHours.Text, out int h) || h <= 0)
                 {
                     errHours.Text = "Hours must be > 0";
@@ -264,6 +352,7 @@ namespace EducationSystem
                     return false;
                 }
 
+                // Valid
                 errHours.Visible = false;
                 aHours.BackColor = Color.White;
             }
@@ -271,6 +360,7 @@ namespace EducationSystem
             return true;
         }
 
+        // Validate Subjects based on Role
         private bool ValidateSubjects()
         {
             bool valid = true;
@@ -278,6 +368,7 @@ namespace EducationSystem
             // ===== TEACHER =====
             if (comboRole.Text == "Teacher")
             {
+                // Subject 1
                 if (string.IsNullOrWhiteSpace(tSub1.Text))
                 {
                     errTSub1.Text = "Please enter the blank";
@@ -291,6 +382,7 @@ namespace EducationSystem
                     tSub1.BackColor = Color.White;
                 }
 
+                // Subject 2
                 if (string.IsNullOrWhiteSpace(tSub2.Text))
                 {
                     errTSub2.Text = "Please enter the blank";
@@ -308,6 +400,7 @@ namespace EducationSystem
             // ===== STUDENT =====
             if (comboRole.Text == "Student")
             {
+                // Subject 1
                 if (string.IsNullOrWhiteSpace(sSub1.Text))
                 {
                     errSSub1.Text = "Please enter the blank";
@@ -321,6 +414,7 @@ namespace EducationSystem
                     sSub1.BackColor = Color.White;
                 }
 
+                // Subject 2
                 if (string.IsNullOrWhiteSpace(sSub2.Text))
                 {
                     errSSub2.Text = "Please enter the blank";
@@ -334,6 +428,7 @@ namespace EducationSystem
                     sSub2.BackColor = Color.White;
                 }
 
+                // Subject 3
                 if (string.IsNullOrWhiteSpace(sSub3.Text))
                 {
                     errSSub3.Text = "Please enter the blank";
@@ -351,22 +446,48 @@ namespace EducationSystem
             return valid;
         }
 
+        // Validate WorkType for Admin
+        private bool ValidateWorkType()
+        {
+            if (comboRole.Text == "Admin")
+            {
+                if (string.IsNullOrWhiteSpace(aWork.Text))
+                {
+                    errWork.Text = "WorkType is required";
+                    errWork.Visible = true;
+                    aWork.BackColor = Color.MistyRose;
+                    return false;
+                }
+
+                errWork.Visible = false;
+                aWork.BackColor = Color.White;
+            }
+
+            return true;
+        }
+
         // ================= SAVE =================
+
+        // Save data when user clicks button
         private void Save(object sender, EventArgs e)
         {
             bool valid = true;
 
+            // Run all validations
             valid &= ValidateName();
             valid &= ValidateEmail();
             valid &= ValidatePhone();
             valid &= ValidateSalary();
             valid &= ValidateHours();
+            valid &= ValidateWorkType();
             valid &= ValidateSubjects();
+            valid &= ValidateRole();
 
             if (!valid) return;
 
             try
             {
+                // Create object based on role
                 if (comboRole.Text == "Teacher")
                 {
                     PersonData = new Teacher()
@@ -413,34 +534,45 @@ namespace EducationSystem
         }
 
         // ================= HELPERS =================
+
+        // Create a normal input field (Label + TextBox + Error Label)
         private TextBox Create(string label, ref int top, out Label errLabel)
         {
+            // Main label (e.g. Name, Phone...)
             Controls.Add(new Label() { Text = label, Left = 20, Top = top + 3 });
 
+            // TextBox input
             TextBox txt = new TextBox() { Left = 120, Top = top, Width = 180 };
             Controls.Add(txt);
 
+            // Error label (display validation message)
             errLabel = new Label()
             {
                 Left = 120,
-                Top = top + 22,
-                ForeColor = Color.Red,
+                Top = top + 22,          // position under textbox
+                ForeColor = Color.Red,  // red color for error
                 AutoSize = true,
-                Visible = false
+                Visible = false         // hidden by default
             };
             Controls.Add(errLabel);
 
+            // Move next control down
             top += 45;
+
             return txt;
         }
 
+        // Create input inside GroupBox (Teacher / Student / Admin)
         private TextBox Add(GroupBox g, string label, int top, out Label errLabel)
         {
+            // Label inside group
             g.Controls.Add(new Label() { Text = label, Left = 10, Top = top });
 
+            // TextBox inside group
             TextBox txt = new TextBox() { Left = 120, Top = top, Width = 150 };
             g.Controls.Add(txt);
 
+            // Error label under textbox
             errLabel = new Label()
             {
                 Left = 120,
