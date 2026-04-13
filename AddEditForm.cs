@@ -32,7 +32,6 @@ namespace EducationSystem
 
         // ===== TEACHER FIELDS =====
         TextBox tSalary, tSub1, tSub2;
-        Label errSalary;
 
         // ===== STUDENT FIELDS =====
         TextBox sSub1, sSub2, sSub3;
@@ -302,13 +301,13 @@ namespace EducationSystem
 
                 if (!double.TryParse(tSalary.Text, out double sal) || sal <= 0)
                 {
-                    errSalary.Text = "Salary must be > 0";
-                    errSalary.Visible = true;
+                    errTSalary.Text = "Salary must be > 0";
+                    errTSalary.Visible = true;
                     tSalary.BackColor = Color.MistyRose;
                     return false;
                 }
 
-                errSalary.Visible = false;
+                errTSalary.Visible = false;
                 tSalary.BackColor = Color.White;
             }
 
@@ -325,13 +324,13 @@ namespace EducationSystem
 
                 if (!double.TryParse(aSalary.Text, out double sal) || sal <= 0)
                 {
-                    errSalary.Text = "Salary must be > 0";
-                    errSalary.Visible = true;
+                    errASalary.Text = "Salary must be > 0";
+                    errASalary.Visible = true;
                     aSalary.BackColor = Color.MistyRose;
                     return false;
                 }
 
-                errSalary.Visible = false;
+                errASalary.Visible = false;
                 aSalary.BackColor = Color.White;
             }
 
@@ -469,6 +468,8 @@ namespace EducationSystem
         // ================= SAVE =================
 
         // Save data when user clicks button
+        // ================= SAVE =================
+
         private void Save(object sender, EventArgs e)
         {
             bool valid = true;
@@ -487,42 +488,82 @@ namespace EducationSystem
 
             try
             {
-                // Create object based on role
-                if (comboRole.Text == "Teacher")
+                // ===== FIX EDIT (CHỈ THÊM ĐOẠN NÀY) =====
+                if (editingPerson != null)
                 {
-                    PersonData = new Teacher()
+                    if (editingPerson is Teacher t)
                     {
-                        Name = txtName.Text,
-                        Phone = txtPhone.Text,
-                        Email = txtEmail.Text,
-                        Salary = double.Parse(tSalary.Text),
-                        Subject1 = tSub1.Text,
-                        Subject2 = tSub2.Text
-                    };
-                }
-                else if (comboRole.Text == "Admin")
-                {
-                    PersonData = new Admin()
+                        t.Name = txtName.Text;
+                        t.Phone = txtPhone.Text;
+                        t.Email = txtEmail.Text;
+                        t.Salary = double.Parse(tSalary.Text);
+                        t.Subject1 = tSub1.Text;
+                        t.Subject2 = tSub2.Text;
+
+                        PersonData = t;
+                    }
+                    else if (editingPerson is Admin a)
                     {
-                        Name = txtName.Text,
-                        Phone = txtPhone.Text,
-                        Email = txtEmail.Text,
-                        Salary = double.Parse(aSalary.Text),
-                        WorkType = aWork.Text,
-                        WorkingHours = int.Parse(aHours.Text)
-                    };
+                        a.Name = txtName.Text;
+                        a.Phone = txtPhone.Text;
+                        a.Email = txtEmail.Text;
+                        a.Salary = double.Parse(aSalary.Text);
+                        a.WorkType = aWork.Text;
+                        a.WorkingHours = int.Parse(aHours.Text);
+
+                        PersonData = a;
+                    }
+                    else if (editingPerson is Student s)
+                    {
+                        s.Name = txtName.Text;
+                        s.Phone = txtPhone.Text;
+                        s.Email = txtEmail.Text;
+                        s.Subject1 = sSub1.Text;
+                        s.Subject2 = sSub2.Text;
+                        s.Subject3 = sSub3.Text;
+
+                        PersonData = s;
+                    }
                 }
                 else
                 {
-                    PersonData = new Student()
+                    // ===== GIỮ NGUYÊN CODE CŨ =====
+                    if (comboRole.Text == "Teacher")
                     {
-                        Name = txtName.Text,
-                        Phone = txtPhone.Text,
-                        Email = txtEmail.Text,
-                        Subject1 = sSub1.Text,
-                        Subject2 = sSub2.Text,
-                        Subject3 = sSub3.Text
-                    };
+                        PersonData = new Teacher()
+                        {
+                            Name = txtName.Text,
+                            Phone = txtPhone.Text,
+                            Email = txtEmail.Text,
+                            Salary = double.Parse(tSalary.Text),
+                            Subject1 = tSub1.Text,
+                            Subject2 = tSub2.Text
+                        };
+                    }
+                    else if (comboRole.Text == "Admin")
+                    {
+                        PersonData = new Admin()
+                        {
+                            Name = txtName.Text,
+                            Phone = txtPhone.Text,
+                            Email = txtEmail.Text,
+                            Salary = double.Parse(aSalary.Text),
+                            WorkType = aWork.Text,
+                            WorkingHours = int.Parse(aHours.Text)
+                        };
+                    }
+                    else
+                    {
+                        PersonData = new Student()
+                        {
+                            Name = txtName.Text,
+                            Phone = txtPhone.Text,
+                            Email = txtEmail.Text,
+                            Subject1 = sSub1.Text,
+                            Subject2 = sSub2.Text,
+                            Subject3 = sSub3.Text
+                        };
+                    }
                 }
 
                 DialogResult = DialogResult.OK;

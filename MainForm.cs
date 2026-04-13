@@ -10,32 +10,27 @@ namespace EducationSystem
 {
     public class MainForm : Form
     {
-        // Manager handles all data operations
         private PersonManager manager = new PersonManager();
-
-        // Current list displayed on DataGridView
         private List<Person> currentList = new List<Person>();
 
-        // Search controls
         private TextBox txtSearch;
         private Button btnSearch;
 
-        // Detail panel (right side)
         private Panel detailPanel;
         private DataGridView dgvDetail;
 
-        // Main table and controls
         private DataGridView dgv;
         private ComboBox comboRole;
         private Button btnAdd, btnView, btnEdit, btnDelete;
 
         public MainForm()
         {
-            InitializeUI(); // Setup UI
-            LoadRoles();    // Load role options
+            InitializeUI();
+            LoadRoles();
+            SeedData();
+            LoadData();
         }
 
-        // ================= UI =================
         private void InitializeUI()
         {
             this.Text = "Education System";
@@ -43,7 +38,6 @@ namespace EducationSystem
             this.Height = 500;
             this.StartPosition = FormStartPosition.CenterScreen;
 
-            // Dropdown to filter by role
             comboRole = new ComboBox()
             {
                 Left = 20,
@@ -51,19 +45,16 @@ namespace EducationSystem
                 Width = 120
             };
 
-            // Buttons for CRUD operations
             btnView = new Button() { Text = "View", Left = 160, Top = 20 };
             btnAdd = new Button() { Text = "Add", Left = 250, Top = 20 };
             btnEdit = new Button() { Text = "Edit", Left = 340, Top = 20 };
             btnDelete = new Button() { Text = "Delete", Left = 430, Top = 20 };
 
-            // Assign button events
             btnView.Click += (s, e) => LoadData();
             btnAdd.Click += BtnAdd_Click;
             btnEdit.Click += BtnEdit_Click;
             btnDelete.Click += BtnDelete_Click;
 
-            // Main DataGridView (list of users)
             dgv = new DataGridView()
             {
                 Left = 20,
@@ -75,10 +66,8 @@ namespace EducationSystem
                 SelectionMode = DataGridViewSelectionMode.FullRowSelect
             };
 
-            // When selecting a row → show detail
             dgv.SelectionChanged += Dgv_SelectionChanged;
 
-            // Search textbox
             txtSearch = new TextBox()
             {
                 Left = 520,
@@ -86,7 +75,6 @@ namespace EducationSystem
                 Width = 150
             };
 
-            // Search button
             btnSearch = new Button()
             {
                 Text = "Search",
@@ -96,7 +84,6 @@ namespace EducationSystem
 
             btnSearch.Click += BtnSearch_Click;
 
-            // Detail panel on the right
             detailPanel = new Panel()
             {
                 Left = 580,
@@ -106,7 +93,6 @@ namespace EducationSystem
                 BorderStyle = BorderStyle.FixedSingle
             };
 
-            // DataGridView to show detailed information
             dgvDetail = new DataGridView()
             {
                 Dock = DockStyle.Fill,
@@ -117,7 +103,6 @@ namespace EducationSystem
 
             detailPanel.Controls.Add(dgvDetail);
 
-            // Add controls to form
             this.Controls.Add(comboRole);
             this.Controls.Add(btnView);
             this.Controls.Add(btnAdd);
@@ -129,16 +114,12 @@ namespace EducationSystem
             this.Controls.Add(detailPanel);
         }
 
-        // Load roles into ComboBox
         private void LoadRoles()
         {
             comboRole.Items.AddRange(new string[] { "All", "Teacher", "Admin", "Student" });
             comboRole.SelectedIndex = 0;
         }
 
-        // ================= DATA =================
-
-        // Load data from manager based on selected role
         private void LoadData()
         {
             List<Person> data;
@@ -153,23 +134,18 @@ namespace EducationSystem
             DisplayData(data);
         }
 
-        // Display list on DataGridView
+        public class DetailItem
+        {
+            public string Field { get; set; }
+            public object Value { get; set; }
+        }
+
         private void DisplayData(List<Person> list)
         {
             dgv.DataSource = null;
-
-            dgv.DataSource = list.Select(p => new
-            {
-                Name = p.Name,
-                Phone = p.Phone,
-                Email = p.Email,
-                Role = p.GetRole()
-            }).ToList();
+            dgv.DataSource = list;
         }
 
-        // ================= BUTTON EVENTS =================
-
-        // Add new person
         private void BtnAdd_Click(object sender, EventArgs e)
         {
             AddEditForm form = new AddEditForm();
@@ -181,7 +157,6 @@ namespace EducationSystem
             }
         }
 
-        // Edit selected person
         private void BtnEdit_Click(object sender, EventArgs e)
         {
             if (dgv.CurrentRow == null) return;
@@ -196,7 +171,6 @@ namespace EducationSystem
             }
         }
 
-        // Delete selected person
         private void BtnDelete_Click(object sender, EventArgs e)
         {
             if (dgv.CurrentRow == null) return;
@@ -207,7 +181,6 @@ namespace EducationSystem
             LoadData();
         }
 
-        // Search function
         private void BtnSearch_Click(object sender, EventArgs e)
         {
             var result = manager.Search(txtSearch.Text);
@@ -217,9 +190,6 @@ namespace EducationSystem
             DisplayData(result);
         }
 
-        // ================= DETAIL =================
-
-        // When user selects a row → show detail
         private void Dgv_SelectionChanged(object sender, EventArgs e)
         {
             if (dgv.CurrentRow == null) return;
@@ -229,43 +199,93 @@ namespace EducationSystem
             ShowDetail(selectedPerson);
         }
 
-        // Display detail in right panel
         private void ShowDetail(Person p)
         {
             dgvDetail.DataSource = GetDetailTable(p);
         }
 
-        // Convert Person object into table format (Field - Value)
         private object GetDetailTable(Person p)
         {
-            var list = new List<object>();
+            var list = new List<DetailItem>();
 
-            list.Add(new { Field = "Role", Value = p.GetRole() });
-            list.Add(new { Field = "Name", Value = p.Name });
-            list.Add(new { Field = "Phone", Value = p.Phone });
-            list.Add(new { Field = "Email", Value = p.Email });
+            list.Add(new DetailItem { Field = "Role", Value = p.GetRole() });
+            list.Add(new DetailItem { Field = "Name", Value = p.Name });
+            list.Add(new DetailItem { Field = "Phone", Value = p.Phone });
+            list.Add(new DetailItem { Field = "Email", Value = p.Email });
 
-            // Add extra fields depending on type
             if (p is Teacher t)
             {
-                list.Add(new { Field = "Salary", Value = t.Salary });
-                list.Add(new { Field = "Subject 1", Value = t.Subject1 });
-                list.Add(new { Field = "Subject 2", Value = t.Subject2 });
+                list.Add(new DetailItem { Field = "Salary", Value = t.Salary });
+                list.Add(new DetailItem { Field = "Subject 1", Value = t.Subject1 });
+                list.Add(new DetailItem { Field = "Subject 2", Value = t.Subject2 });
             }
             else if (p is Admin a)
             {
-                list.Add(new { Field = "Salary", Value = a.Salary });
-                list.Add(new { Field = "Work Type", Value = a.WorkType });
-                list.Add(new { Field = "Working Hours", Value = a.WorkingHours });
+                list.Add(new DetailItem { Field = "Salary", Value = a.Salary });
+                list.Add(new DetailItem { Field = "Work Type", Value = a.WorkType });
+                list.Add(new DetailItem { Field = "Working Hours", Value = a.WorkingHours });
             }
             else if (p is Student s)
             {
-                list.Add(new { Field = "Subject 1", Value = s.Subject1 });
-                list.Add(new { Field = "Subject 2", Value = s.Subject2 });
-                list.Add(new { Field = "Subject 3", Value = s.Subject3 });
+                list.Add(new DetailItem { Field = "Subject 1", Value = s.Subject1 });
+                list.Add(new DetailItem { Field = "Subject 2", Value = s.Subject2 });
+                list.Add(new DetailItem { Field = "Subject 3", Value = s.Subject3 });
             }
 
             return list;
+        }
+
+        private void SeedData()
+        {
+            manager.Add(new Teacher()
+            {
+                Name = "Nguyen Van A",
+                Phone = "0987654321",
+                Email = "a@gmail.com",
+                Salary = 1500,
+                Subject1 = "Math",
+                Subject2 = "Physics"
+            });
+
+            manager.Add(new Teacher()
+            {
+                Name = "Tran Thi B",
+                Phone = "0912345678",
+                Email = "b@gmail.com",
+                Salary = 1800,
+                Subject1 = "English",
+                Subject2 = "Literature"
+            });
+
+            manager.Add(new Admin()
+            {
+                Name = "Le Van C",
+                Phone = "0909123456",
+                Email = "c@gmail.com",
+                Salary = 2000,
+                WorkType = "Full-time",
+                WorkingHours = 8
+            });
+
+            manager.Add(new Student()
+            {
+                Name = "Pham Thi D",
+                Phone = "0977888999",
+                Email = "d@gmail.com",
+                Subject1 = "Math",
+                Subject2 = "Chemistry",
+                Subject3 = "Biology"
+            });
+
+            manager.Add(new Student()
+            {
+                Name = "Hoang Van E",
+                Phone = "0966555444",
+                Email = "e@gmail.com",
+                Subject1 = "History",
+                Subject2 = "Geography",
+                Subject3 = "Civic"
+            });
         }
     }
 }
