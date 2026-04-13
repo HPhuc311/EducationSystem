@@ -142,8 +142,11 @@ namespace EducationSystem
 
         private void DisplayData(List<Person> list)
         {
+            // Prevent SelectionChanged firing while we rebind the grid
+            dgv.SelectionChanged -= Dgv_SelectionChanged;
             dgv.DataSource = null;
             dgv.DataSource = list;
+            dgv.SelectionChanged += Dgv_SelectionChanged;
         }
 
         private void BtnAdd_Click(object sender, EventArgs e)
@@ -161,7 +164,8 @@ namespace EducationSystem
         {
             if (dgv.CurrentRow == null) return;
 
-            Person p = currentList[dgv.CurrentRow.Index];
+            var p = dgv.CurrentRow.DataBoundItem as Person;
+            if (p == null) return;
 
             AddEditForm form = new AddEditForm(p);
 
@@ -175,7 +179,9 @@ namespace EducationSystem
         {
             if (dgv.CurrentRow == null) return;
 
-            Person p = currentList[dgv.CurrentRow.Index];
+            var p = dgv.CurrentRow.DataBoundItem as Person;
+            if (p == null) return;
+
             manager.Delete(p);
 
             LoadData();
@@ -194,7 +200,8 @@ namespace EducationSystem
         {
             if (dgv.CurrentRow == null) return;
 
-            Person selectedPerson = currentList[dgv.CurrentRow.Index];
+            var selectedPerson = dgv.CurrentRow.DataBoundItem as Person;
+            if (selectedPerson == null) return;
 
             ShowDetail(selectedPerson);
         }
