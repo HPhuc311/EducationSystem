@@ -1,0 +1,213 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Admin\\OneDrive\\Documents\\GREENWICH\\1A - COURSEWORK\\COMP1551-APPLICATION DEVELOPMENT\\CODE\\EducationCenterSystem\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{BCCAF776-3460-4AF8-B4F8-7E585C67556F}|EducationCenterSystem\\EducationSystem.csproj|C:\\Users\\Admin\\OneDrive\\Documents\\GREENWICH\\1A - COURSEWORK\\COMP1551-APPLICATION DEVELOPMENT\\CODE\\EducationCenterSystem\\educationcentersystem\\addeditform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BCCAF776-3460-4AF8-B4F8-7E585C67556F}|EducationCenterSystem\\EducationSystem.csproj|solutionrelative:educationcentersystem\\addeditform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BCCAF776-3460-4AF8-B4F8-7E585C67556F}|EducationCenterSystem\\EducationSystem.csproj|C:\\Users\\Admin\\OneDrive\\Documents\\GREENWICH\\1A - COURSEWORK\\COMP1551-APPLICATION DEVELOPMENT\\CODE\\EducationCenterSystem\\educationcentersystem\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BCCAF776-3460-4AF8-B4F8-7E585C67556F}|EducationCenterSystem\\EducationSystem.csproj|solutionrelative:educationcentersystem\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BCCAF776-3460-4AF8-B4F8-7E585C67556F}|EducationCenterSystem\\EducationCenterSystem.csproj|C:\\Users\\Admin\\OneDrive\\Documents\\GREENWICH\\1A - COURSEWORK\\COMP1551-APPLICATION DEVELOPMENT\\CODE\\EducationCenterSystem\\educationcentersystem\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BCCAF776-3460-4AF8-B4F8-7E585C67556F}|EducationCenterSystem\\EducationCenterSystem.csproj|solutionrelative:educationcentersystem\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BCCAF776-3460-4AF8-B4F8-7E585C67556F}|EducationCenterSystem\\EducationSystem.csproj|C:\\Users\\Admin\\OneDrive\\Documents\\GREENWICH\\1A - COURSEWORK\\COMP1551-APPLICATION DEVELOPMENT\\CODE\\EducationCenterSystem\\educationcentersystem\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BCCAF776-3460-4AF8-B4F8-7E585C67556F}|EducationCenterSystem\\EducationSystem.csproj|solutionrelative:educationcentersystem\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BCCAF776-3460-4AF8-B4F8-7E585C67556F}|EducationCenterSystem\\EducationSystem.csproj|c:\\users\\admin\\onedrive\\documents\\greenwich\\1a - coursework\\comp1551-application development\\code\\educationcentersystem\\educationcentersystem\\models\\student.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BCCAF776-3460-4AF8-B4F8-7E585C67556F}|EducationCenterSystem\\EducationSystem.csproj|solutionrelative:educationcentersystem\\models\\student.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BCCAF776-3460-4AF8-B4F8-7E585C67556F}|EducationCenterSystem\\EducationCenterSystem.csproj|C:\\Users\\Admin\\OneDrive\\Documents\\GREENWICH\\1A - COURSEWORK\\COMP1551-APPLICATION DEVELOPMENT\\CODE\\EducationCenterSystem\\educationcentersystem\\models\\student.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BCCAF776-3460-4AF8-B4F8-7E585C67556F}|EducationCenterSystem\\EducationCenterSystem.csproj|solutionrelative:educationcentersystem\\models\\student.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BCCAF776-3460-4AF8-B4F8-7E585C67556F}|EducationCenterSystem\\EducationSystem.csproj|c:\\users\\admin\\onedrive\\documents\\greenwich\\1a - coursework\\comp1551-application development\\code\\educationcentersystem\\educationcentersystem\\services\\personmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BCCAF776-3460-4AF8-B4F8-7E585C67556F}|EducationCenterSystem\\EducationSystem.csproj|solutionrelative:educationcentersystem\\services\\personmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BCCAF776-3460-4AF8-B4F8-7E585C67556F}|EducationCenterSystem\\EducationCenterSystem.csproj|C:\\Users\\Admin\\OneDrive\\Documents\\GREENWICH\\1A - COURSEWORK\\COMP1551-APPLICATION DEVELOPMENT\\CODE\\EducationCenterSystem\\educationcentersystem\\services\\personmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BCCAF776-3460-4AF8-B4F8-7E585C67556F}|EducationCenterSystem\\EducationCenterSystem.csproj|solutionrelative:educationcentersystem\\services\\personmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BCCAF776-3460-4AF8-B4F8-7E585C67556F}|EducationCenterSystem\\EducationCenterSystem.csproj|C:\\Users\\Admin\\OneDrive\\Documents\\GREENWICH\\1A - COURSEWORK\\COMP1551-APPLICATION DEVELOPMENT\\CODE\\EducationCenterSystem\\educationcentersystem\\models\\admin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BCCAF776-3460-4AF8-B4F8-7E585C67556F}|EducationCenterSystem\\EducationCenterSystem.csproj|solutionrelative:educationcentersystem\\models\\admin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BCCAF776-3460-4AF8-B4F8-7E585C67556F}|EducationCenterSystem\\EducationCenterSystem.csproj|C:\\Users\\Admin\\OneDrive\\Documents\\GREENWICH\\1A - COURSEWORK\\COMP1551-APPLICATION DEVELOPMENT\\CODE\\EducationCenterSystem\\educationcentersystem\\models\\teacher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BCCAF776-3460-4AF8-B4F8-7E585C67556F}|EducationCenterSystem\\EducationCenterSystem.csproj|solutionrelative:educationcentersystem\\models\\teacher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BCCAF776-3460-4AF8-B4F8-7E585C67556F}|EducationCenterSystem\\EducationCenterSystem.csproj|C:\\Users\\Admin\\OneDrive\\Documents\\GREENWICH\\1A - COURSEWORK\\COMP1551-APPLICATION DEVELOPMENT\\CODE\\EducationCenterSystem\\educationcentersystem\\models\\person.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BCCAF776-3460-4AF8-B4F8-7E585C67556F}|EducationCenterSystem\\EducationCenterSystem.csproj|solutionrelative:educationcentersystem\\models\\person.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 6,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{40ea2e6b-2121-4bb8-a43e-c83c04b51041}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Student.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Documents\\GREENWICH\\1A - COURSEWORK\\COMP1551-APPLICATION DEVELOPMENT\\CODE\\EducationCenterSystem\\EducationCenterSystem\\Models\\Student.cs",
+              "RelativeDocumentMoniker": "EducationCenterSystem\\Models\\Student.cs",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Documents\\GREENWICH\\1A - COURSEWORK\\COMP1551-APPLICATION DEVELOPMENT\\CODE\\EducationCenterSystem\\EducationCenterSystem\\Models\\Student.cs",
+              "RelativeToolTip": "EducationCenterSystem\\Models\\Student.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-13T05:02:17.187Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "PersonManager.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Documents\\GREENWICH\\1A - COURSEWORK\\COMP1551-APPLICATION DEVELOPMENT\\CODE\\EducationCenterSystem\\EducationCenterSystem\\Services\\PersonManager.cs",
+              "RelativeDocumentMoniker": "EducationCenterSystem\\Services\\PersonManager.cs",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Documents\\GREENWICH\\1A - COURSEWORK\\COMP1551-APPLICATION DEVELOPMENT\\CODE\\EducationCenterSystem\\EducationCenterSystem\\Services\\PersonManager.cs",
+              "RelativeToolTip": "EducationCenterSystem\\Services\\PersonManager.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAB4AAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-11T02:44:20.653Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Documents\\GREENWICH\\1A - COURSEWORK\\COMP1551-APPLICATION DEVELOPMENT\\CODE\\EducationCenterSystem\\EducationCenterSystem\\Program.cs",
+              "RelativeDocumentMoniker": "EducationCenterSystem\\Program.cs",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Documents\\GREENWICH\\1A - COURSEWORK\\COMP1551-APPLICATION DEVELOPMENT\\CODE\\EducationCenterSystem\\EducationCenterSystem\\Program.cs",
+              "RelativeToolTip": "EducationCenterSystem\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-11T02:12:26.187Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AddEditForm.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Documents\\GREENWICH\\1A - COURSEWORK\\COMP1551-APPLICATION DEVELOPMENT\\CODE\\EducationCenterSystem\\EducationCenterSystem\\AddEditForm.cs",
+              "RelativeDocumentMoniker": "EducationCenterSystem\\AddEditForm.cs",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Documents\\GREENWICH\\1A - COURSEWORK\\COMP1551-APPLICATION DEVELOPMENT\\CODE\\EducationCenterSystem\\EducationCenterSystem\\AddEditForm.cs*",
+              "RelativeToolTip": "EducationCenterSystem\\AddEditForm.cs*",
+              "ViewState": "AgIAAAUCAAAAAAAAAAAwwEMCAABNAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-10T03:49:01.507Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "MainForm.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Documents\\GREENWICH\\1A - COURSEWORK\\COMP1551-APPLICATION DEVELOPMENT\\CODE\\EducationCenterSystem\\EducationCenterSystem\\MainForm.cs",
+              "RelativeDocumentMoniker": "EducationCenterSystem\\MainForm.cs",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Documents\\GREENWICH\\1A - COURSEWORK\\COMP1551-APPLICATION DEVELOPMENT\\CODE\\EducationCenterSystem\\EducationCenterSystem\\MainForm.cs",
+              "RelativeToolTip": "EducationCenterSystem\\MainForm.cs",
+              "ViewState": "AgIAALEAAAAAAAAAAIA4wMgAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-10T03:47:40.847Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Documents\\GREENWICH\\1A - COURSEWORK\\COMP1551-APPLICATION DEVELOPMENT\\CODE\\EducationCenterSystem\\EducationCenterSystem\\Program.cs",
+              "RelativeDocumentMoniker": "EducationCenterSystem\\Program.cs",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Documents\\GREENWICH\\1A - COURSEWORK\\COMP1551-APPLICATION DEVELOPMENT\\CODE\\EducationCenterSystem\\EducationCenterSystem\\Program.cs",
+              "RelativeToolTip": "EducationCenterSystem\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-10T03:37:44.73Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "PersonManager.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Documents\\GREENWICH\\1A - COURSEWORK\\COMP1551-APPLICATION DEVELOPMENT\\CODE\\EducationCenterSystem\\EducationCenterSystem\\Services\\PersonManager.cs",
+              "RelativeDocumentMoniker": "EducationCenterSystem\\Services\\PersonManager.cs",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Documents\\GREENWICH\\1A - COURSEWORK\\COMP1551-APPLICATION DEVELOPMENT\\CODE\\EducationCenterSystem\\EducationCenterSystem\\Services\\PersonManager.cs",
+              "RelativeToolTip": "EducationCenterSystem\\Services\\PersonManager.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAB4AAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-10T03:37:34.391Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Student.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Documents\\GREENWICH\\1A - COURSEWORK\\COMP1551-APPLICATION DEVELOPMENT\\CODE\\EducationCenterSystem\\EducationCenterSystem\\Models\\Student.cs",
+              "RelativeDocumentMoniker": "EducationCenterSystem\\Models\\Student.cs",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Documents\\GREENWICH\\1A - COURSEWORK\\COMP1551-APPLICATION DEVELOPMENT\\CODE\\EducationCenterSystem\\EducationCenterSystem\\Models\\Student.cs",
+              "RelativeToolTip": "EducationCenterSystem\\Models\\Student.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-10T03:36:53.909Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Teacher.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Documents\\GREENWICH\\1A - COURSEWORK\\COMP1551-APPLICATION DEVELOPMENT\\CODE\\EducationCenterSystem\\EducationCenterSystem\\Models\\Teacher.cs",
+              "RelativeDocumentMoniker": "EducationCenterSystem\\Models\\Teacher.cs",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Documents\\GREENWICH\\1A - COURSEWORK\\COMP1551-APPLICATION DEVELOPMENT\\CODE\\EducationCenterSystem\\EducationCenterSystem\\Models\\Teacher.cs",
+              "RelativeToolTip": "EducationCenterSystem\\Models\\Teacher.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-10T03:36:36.622Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Admin.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Documents\\GREENWICH\\1A - COURSEWORK\\COMP1551-APPLICATION DEVELOPMENT\\CODE\\EducationCenterSystem\\EducationCenterSystem\\Models\\Admin.cs",
+              "RelativeDocumentMoniker": "EducationCenterSystem\\Models\\Admin.cs",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Documents\\GREENWICH\\1A - COURSEWORK\\COMP1551-APPLICATION DEVELOPMENT\\CODE\\EducationCenterSystem\\EducationCenterSystem\\Models\\Admin.cs",
+              "RelativeToolTip": "EducationCenterSystem\\Models\\Admin.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-10T03:36:24.107Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Person.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Documents\\GREENWICH\\1A - COURSEWORK\\COMP1551-APPLICATION DEVELOPMENT\\CODE\\EducationCenterSystem\\EducationCenterSystem\\Models\\Person.cs",
+              "RelativeDocumentMoniker": "EducationCenterSystem\\Models\\Person.cs",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Documents\\GREENWICH\\1A - COURSEWORK\\COMP1551-APPLICATION DEVELOPMENT\\CODE\\EducationCenterSystem\\EducationCenterSystem\\Models\\Person.cs",
+              "RelativeToolTip": "EducationCenterSystem\\Models\\Person.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-10T03:36:16.666Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
